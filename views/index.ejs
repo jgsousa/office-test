@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My Office Test</title>
+
+    <!-- Office JavaScript API -->
+    <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1.1/hosted/office.debug.js"></script>
+
+    <!-- LOCAL -->
+    <link rel="stylesheet" href="scripts/office-ui-fabric-js/dist/css/fabric.min.css" />
+    <link rel="stylesheet" href="scripts/office-ui-fabric-js/dist/css/fabric.components.css" />
+
+    <!-- Template styles -->
+    <link href="app.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body class="ms-font-m ms-welcome">
+    <div id="content-header">
+        <div class="padding">
+            <h1>Welcome</h1>
+        </div>
+    </div>
+    <div id="content-main">
+        <div class="padding">
+            <p>Select the contract number to see its information:</p>
+            <br />
+            <div class="ms-TextField">
+                <label class="ms-Label">Master Agreement Nº</label>
+                <input class="ms-TextField-field" type="text" value="" placeholder="">
+              </div>
+            <button class="ms-Button" id="set-color">Retrieve</button>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="scripts/core-js/client/core.js"></script>
+    <script type="text/javascript" src="scripts/jquery/dist/jquery.js"></script>
+    <script type="text/javascript" src="scripts/office-ui-fabric-js/dist/js/fabric.js"></script>
+
+    <script src="/scripts/odata/o.min.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+    <script>
+        var retrieveData = function retrieveData() {
+            var oHandler = o('https://odata.domain.fi/v4/odata/domains');
+            oHandler.get(function(data) {
+                console.log(data); // data of the TripPinService/People endpoint
+            });
+        }
+        $(document).ready(function () {
+            $('#set-color').click(retrieveData);
+        }); 
+    </script>
+</body>
+
+</html>
