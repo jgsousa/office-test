@@ -1,6 +1,11 @@
 'use strict';
 
 (function () {
+
+    $(document).ready(function () {
+        $('#set-color').click(retrieveData);
+    });
+
     Office.initialize = function (reason) {
         $(document).ready(function () {
             $('#set-color').click(retrieveData);
@@ -8,13 +13,18 @@
     };
 
     function retrieveData() {
-        var oHandler = o('http://services.odata.org/V4/(S(wptr35qf3bz4kb5oatn432ul))/TripPinServiceRW/People');
-        oHandler.get(function(data) {
-            console.log(data); // data of the TripPinService/People endpoint
-        });
+        var contract = $('.ms-TextField-field').val();
+        $.ajax({
+            url: "/api/contracts/" + contract,
+            cache: false,
+            success: function(data){
+                console.log(JSON.stringify(data));
+              //setExcelData(data);
+            }
+          });
     }
 
-    function setExcelData() {
+    function setExcelData(data) {
         Excel.run(function (context) {
             var range = context.workbook.getSelectedRange();
             range.format.fill.color = 'green';

@@ -21,7 +21,7 @@
 <body class="ms-font-m ms-welcome">
     <div id="content-header">
         <div class="padding">
-            <h1>Welcome</h1>
+            <h1>Contract Data</h1>
         </div>
     </div>
     <div id="content-main">
@@ -42,17 +42,7 @@
 
     <script src="/scripts/odata/o.min.js"></script>
     <script type="text/javascript" src="app.js"></script>
-    <script>
-        var retrieveData = function retrieveData() {
-            var oHandler = o('https://odata.domain.fi/v4/odata/domains');
-            oHandler.get(function(data) {
-                console.log(data); // data of the TripPinService/People endpoint
-            });
-        }
-        $(document).ready(function () {
-            $('#set-color').click(retrieveData);
-        }); 
-    </script>
+
 </body>
 
 </html>
