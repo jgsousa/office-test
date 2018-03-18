@@ -28,12 +28,19 @@
             console.log(JSON.stringify(data));
             const currentWorksheet = context.workbook.worksheets.getActiveWorksheet();
             const peopleTable = currentWorksheet.tables.add("A1:B1", true /*hasHeaders*/);
+            const people2Table = currentWorksheet.tables.add("A3:B3", true /*hasHeaders*/);
             peopleTable.name = "PeopleTable";
+            people2Table.name = "People2Table";
 
             peopleTable.getHeaderRowRange().values = 
                 [["First Name", "Last Name"]];
+            people2Table.getHeaderRowRange().values = 
+                [["First Name2", "Last Name2"]];
+
             data.forEach(function(item){
                 peopleTable.rows.add(null,
+                    [[ item.UserName, item.LastName ]]);
+                people2Table.rows.add(null,
                     [[ item.UserName, item.LastName ]]);
             });
 
