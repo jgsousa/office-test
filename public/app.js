@@ -25,6 +25,7 @@
 
     function setExcelData(data) {
         Excel.run(function (context) {
+            console.log(JSON.stringify(data));
             const currentWorksheet = context.workbook.worksheets.getActiveWorksheet();
             const peopleTable = currentWorksheet.tables.add("A1:B1", true /*hasHeaders*/);
             peopleTable.name = "PeopleTable";
@@ -33,7 +34,7 @@
                 [["First Name", "Last Name"]];
             data.forEach(function(item){
                 peopleTable.rows.add(null,
-                    [[ element.FirstName, element.LastName ]]);
+                    [[ item.UserName, item.LastName ]]);
             });
 
             return context.sync();
