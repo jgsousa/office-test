@@ -31,7 +31,7 @@
 
             peopleTable.getHeaderRowRange().values = 
                 [["First Name", "Last Name"]];
-            data.array.forEach(element => {
+            data.forEach(function(item){
                 peopleTable.rows.add(null,
                     [[ element.FirstName, element.LastName ]]);
             });
