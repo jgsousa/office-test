@@ -22,3 +22,11 @@
 .padding {
     padding: 15px;
 }
+
+#listbox{
+    display:none;
+}
+
+#listbox.show{
+    display:block;
+}
