@@ -2,9 +2,9 @@
 
 (function () {
 
-    $(document).ready(function () {
-        $('#set-color').click(retrieveData);
-    });
+    //$(document).ready(function () {
+    //    $('#set-color').click(retrieveData);
+    //});
 
     Office.initialize = function (reason) {
         $(document).ready(function () {
@@ -18,16 +18,23 @@
             url: "/api/contracts/" + contract,
             cache: false,
             success: function(data){
-                console.log(JSON.stringify(data));
-              //setExcelData(data);
+                setExcelData(data);
             }
           });
     }
 
     function setExcelData(data) {
         Excel.run(function (context) {
-            var range = context.workbook.getSelectedRange();
-            range.format.fill.color = 'green';
+            const currentWorksheet = context.workbook.worksheets.getActiveWorksheet();
+            const peopleTable = currentWorksheet.tables.add("A1:B1", true /*hasHeaders*/);
+            peopleTable.name = "PeopleTable";
+
+            peopleTable.getHeaderRowRange().values = 
+                [["First Name", "Last Name"]];
+            data.array.forEach(element => {
+                peopleTable.rows.add(null,
+                    [[ element.FirstName, element.LastName ]]);
+            });
 
             return context.sync();
         }).catch(function (error) {
